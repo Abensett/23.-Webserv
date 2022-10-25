@@ -69,7 +69,7 @@ int		Webserver::launch(void)
 
 				char * buffer = 0;
 				long length;
-				FILE * f = fopen (filename, "rb");
+				FILE * f = fopen ("index.html", "rb");
 
 				if (f)
 				{
