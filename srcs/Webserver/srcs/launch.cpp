@@ -61,13 +61,13 @@ int		Webserver::launch(void)
 				recv(events[i].data.fd, request, 1024, 0);
 				std::cout << request << std::endl;
 
-				// FILE *html_file;
-				// html_file = fopen("index.html", "r");
-				// if (html_file == NULL)
-				// 	return (1);
-				// char response[1024];
-				// fgets(response, 1024, html_file);
-				// printf("%s \n", response);
+				FILE *html_file;
+				html_file = fopen("index.html", "r");
+				if (html_file == NULL)
+					return (1);
+				char response[1024];
+				fgets(response, 1024, html_file);
+				printf("%s \n", response);
 
 
 				char	header[2048] = "HTTP/1.1 200 OK\r\n\n";
