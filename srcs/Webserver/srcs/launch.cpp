@@ -74,10 +74,10 @@ int		Webserver::launch(void)
  
 
 				buffer = (char*)calloc(numbytes, sizeof(char));	
- 
+				long numbytes;
 				if(buffer == NULL)
 					return 1;
- 
+
 				fread(buffer, sizeof(char), numbytes, infile);
 				fclose(infile);
 
