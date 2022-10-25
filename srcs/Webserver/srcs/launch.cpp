@@ -72,22 +72,22 @@ int		Webserver::launch(void)
 				char *buffer;
 				numbytes = ftell(html_file);
  
-				fseek(html_file, 0L, SEEK_SET);	
+				// fseek(html_file, 0L, SEEK_SET);	
  
 
-				buffer = (char*)calloc(numbytes, sizeof(char));	
-				if(buffer == NULL)
-					return 1;
+				// buffer = (char*)calloc(numbytes, sizeof(char));	
+				// if(buffer == NULL)
+				// 	return 1;
 
-				fread(buffer, sizeof(char), numbytes, html_file);
-				fclose(html_file);
+				// fread(buffer, sizeof(char), numbytes, html_file);
+				// fclose(html_file);
 
-				printf("\n\n%s \n\n", buffer);
+				// printf("\n\n%s \n\n", buffer);
 
 				char	header[2048] = "HTTP/1.1 200 OK\r\n\n";
-				strcat(header, buffer);
+				// strcat(header, buffer);
 
-				// strcat(header,response);
+				// // strcat(header,response);
 				send(events[i].data.fd, header, strlen(header), 0);
 
 				if (remove_client(epoll_socket, client_socket, events))
