@@ -24,7 +24,7 @@ int main()
 	fread(buffer, sizeof(char), numbytes, html_file);
 	fclose(html_file);
 				char	header[2048] = "Content-Type: text/html\n\n";
-				strcat(header, buffer);
+
 				printf("\n\n%s \n\n", header);
         return 0;
 }
