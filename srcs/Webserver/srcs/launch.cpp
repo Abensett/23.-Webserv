@@ -88,7 +88,7 @@ int		Webserver::launch(void)
 
 			
 				char	header[2048] = "HTTP/1.0 200 OK\r\nContent-Type: text/html\n\n";
-				strcat(header, buffer);
+				// strcat(header, buffer);
 				cout << header <<endl;
 				send(events[i].data.fd,&header, strlen(header), 0);
 
