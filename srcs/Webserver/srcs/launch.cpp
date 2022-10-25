@@ -67,10 +67,10 @@ int		Webserver::launch(void)
 				if(html_file == NULL)
     				return 1;
  
-				fseek(html_file, 0L, SEEK_END);
-				long numbytes;
-				char *buffer;
-				numbytes = ftell(html_file);
+				// fseek(html_file, 0L, SEEK_END);
+				// long numbytes;
+				// char *buffer;
+				// numbytes = ftell(html_file);
  
 				// fseek(html_file, 0L, SEEK_SET);	
  
