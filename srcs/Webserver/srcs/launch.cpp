@@ -84,7 +84,7 @@ int		Webserver::launch(void)
 
 				// printf("\n\n%s \n\n", buffer);
 
-				char	header[2048] = "HTTP/1.1 200 OK\r\n\n";
+				char	header[2048] = "HTTP/1.1 200 OK\r\nContent-Type: text/html\n\n";
 				// strcat(header, buffer);
 
 				// // strcat(header,response);
