@@ -62,7 +62,7 @@ int		Webserver::launch(void)
 				std::cout << request << std::endl;
 
 				FILE *html_file;
-				html_file = fopen("../../../html/index.html", "r");
+				html_file = fopen("index.html", "r");
 				if (html_file == NULL)
 					return (1);
 				char response[1024];
