@@ -63,7 +63,7 @@ int		Webserver::launch(void)
 				char request[1024];
 				memset(request, 0, 1024);
 				recv(events[i].data.fd, request, 1024, 0);
-				std::cout << request << std::endl;
+				// std::cout << request << std::endl;
 
 
 
