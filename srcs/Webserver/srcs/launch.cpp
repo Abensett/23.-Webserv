@@ -73,7 +73,7 @@ int		Webserver::launch(void)
 				line = 0;
 				while (!feof(file) && !ferror(file))
 				{
-					if (fgets(buffer[line], 1, 5000, file) != 0)
+					if (fgets(buffer[line], 5000, file) != 0)
 						line++;
 				}
 				fclose(file);			
