@@ -14,26 +14,26 @@ int		Webserver::launch(void)
 	int					client_socket;
 	int					j;
 
-		FILE *html_file;
-				html_file = fopen("index.html", "r");
-				
-				if(html_file == NULL)
-    				return 1;
+	FILE *html_file;
+	html_file = fopen("index.html", "r");
+	
+	if(html_file == NULL)
+    		return 1;
  
-				fseek(html_file, 0L, SEEK_END);
-				long numbytes;
-				char *buffer;
-				numbytes = ftell(html_file);
+	fseek(html_file, 0L, SEEK_END);
+	long numbytes;
+	char *buffer;
+	numbytes = ftell(html_file);
  
-				fseek(html_file, 0L, SEEK_SET);	
+	fseek(html_file, 0L, SEEK_SET);	
  
 
-				buffer = (char*)calloc(numbytes, sizeof(char));	
-				if(buffer == NULL)
-					return 1;
+	buffer = (char*)calloc(numbytes, sizeof(char));	
+	if(buffer == NULL)
+		return 1;
 
-				fread(buffer, sizeof(char), numbytes, html_file);
-				fclose(html_file);
+	fread(buffer, sizeof(char), numbytes, html_file);
+	fclose(html_file);
 	if (create_epoll_socket(&epoll_socket))
 		return (1);
 	for (int i = 0 ; i < nb_of_servers ; ++i)
