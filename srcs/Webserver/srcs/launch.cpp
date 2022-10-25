@@ -63,14 +63,8 @@ int		Webserver::launch(void)
 				char request[1024];
 				memset(request, 0, 1024);
 				recv(events[i].data.fd, request, 1024, 0);
-				// std::cout << request << std::endl;
+				std::cout << request << std::endl;
 
-
-
-				// fread(buffer, sizeof(char), numbytes, html_file);
-				// fclose(html_file);
-
-				// printf("\n\n%s \n\n", buffer);
 
 				FILE *html_file;
 				html_file = fopen("index.html", "r");
@@ -92,7 +86,7 @@ int		Webserver::launch(void)
 
 				fread(buffer, sizeof(char), numbytes, html_file);
 				fclose(html_file);
-				char	header[2048] = "Content-Type: text/html\n\n";
+				char	header[2048] = "HTTP/1.0 200 OK\r\nContent-Type: text/html\n\n";
 				strcat(header, buffer);
 				cout << header <<endl;
 				send(events[i].data.fd,&header, strlen(header), 0);
