@@ -76,8 +76,12 @@ int		Webserver::launch(void)
 					if (fgets(buffer[line], 5000, file) != 0)
 						line++;
 				}
-				fclose(file);			
-				printf("%s", buffer);
+				fclose(file);		
+
+				line = 0;	
+				while (buffer[line])
+					printf("%s", buffer[line++]);
+
 				char	header[2048] = "HTTP/1.0 200 OK\r\n\r\n";
 				strcat(header, buffer);
 				cout << header <<endl;
