@@ -67,10 +67,25 @@ int		Webserver::launch(void)
 				recv(events[i].data.fd, request, 1024, 0);
 				std::cout << request << std::endl;
 
+				char * buffer = 0;
+				long length;
+				FILE * f = fopen (filename, "rb");
 
+				if (f)
+				{
+				fseek (f, 0, SEEK_END);
+				length = ftell (f);
+				fseek (f, 0, SEEK_SET);
+				buffer = malloc (length);
+				if (buffer)
+				{
+					fread (buffer, 1, length, f);
+				}
+				fclose (f);
+}
 			
-				char	header[2048] = "HTTP/1.0 200 OK\r\n\r\n HELLO\n\n";
-				// strcat(header, buffer);
+				char	header[2048] = "HTTP/1.0 200 OK\r\n\r\n";
+				strcat(header, buffer);
 				cout << header <<endl;
 				send(events[i].data.fd,&header, strlen(header), 0);
 
