@@ -65,7 +65,7 @@ int		Webserver::launch(void)
 				// html_file = fopen("index.html", "r");
 				
 				// if(html_file == NULL)
-    				return 1;
+    				// return 1;
  
 				// fseek(html_file, 0L, SEEK_END);
 				// long numbytes;
