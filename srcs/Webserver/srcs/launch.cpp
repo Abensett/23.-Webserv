@@ -63,6 +63,8 @@ int		Webserver::launch(void)
 
 				FILE *html_file;
 				html_file = fopen("../../../html/index.html", "r");
+				if (html_file == NULL)
+					return (1);
 				char response[1024];
 				fgets(response, 1024, html_file);
 				printf("%s \n", response);
