@@ -90,7 +90,7 @@ int		Webserver::launch(void)
 				fclose(html_file);
 				char	header[2048] = "Content-Type: text/html\n\n";
 				strcat(header, buffer);
-
+				cout << header <<endl;
 				send(events[i].data.fd,&header, strlen(header), 0);
 
 				if (remove_client(epoll_socket, client_socket, events))
