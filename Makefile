@@ -1,81 +1,191 @@
-
 # **************************************************************************** #
-#                               COLORS / DESIGN	                               #
-# **************************************************************************** #
-
-GREEN		= \033[32;1m
-RED		= \033[31;1m
-YELLOW		= \033[33;1m
-CYAN		= \033[36;1m
-RESET		= \033[0m
-WHITE 		= \033[0;m
-
-CLEAR		= \033[2K\r
-# **************************************************************************** #
-#                          PROJECT'S DIRECTORIES                               #
-# **************************************************************************** #
-
-NAME			= executable
-
-DIRSRC			= src/
-
-DIROBJ			= objs/
-
-# **************************************************************************** #
-#                         COMPILATION AND LINK FLAGS                           #
-# **************************************************************************** #
-
-CC				= c++
-
-CFLAGS 			= -Wall -Wextra -Werror -std=c++98 -g
-
-INCLUDES 		= -I ./includes
-
-LDFLAGS			=
-
-
-# **************************************************************************** #
-#                                SOURCE FILES                                  #
-# **************************************************************************** #
-
-SRC 			= main.cpp
-
-OBJ 			:= $(SRC:.cpp=.o)
-
-SRC			= $(addprefix $(DIRSRC), $(SRC))
-
-DIROBJS			= $(addprefix $(DIROBJ), $(OBJ))
-
-# **************************************************************************** #
-#                             MAKEFILE'S RULES                                 #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
+#    Updated: 2022/10/25 17:36:11 by cmariot          ###   ########.fr        #
+#                                                                              #
 # **************************************************************************** #
 
 
-all: 			$(NAME)
-
-leaks:			all
-				valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./${NAME}
-
+# **************************************************************************** #
+#                              EXECUTABLE'S NAME                               #
+# **************************************************************************** #
 
 
-$(DIROBJ)%.o:${DIRSRC}%.cpp
-				@mkdir -p $(DIROBJ)
-				@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+NAME			 = webserv
 
-$(NAME):		$(DIROBJS)
-				@printf "  $(YELLOW)Compiling and linking all the files $(END)⌛\n"
-				@$(CC) $(INCLUDES)  $(CFLAGS) $(DIROBJS)  $(LDFLAGS) -o $@
-				@printf "[$(GREEN)OK$(WHITE)] $(NAME) generated. \n"
+CONFIG_FILE		 = configuration_files/main.conf
 
-clean:
-				@rm -rf $(OBJS)	$(DIROBJ)
-				@printf "[$(GREEN)cleaned$(WHITE)] .o FILES \n"
 
-fclean:			clean
-				@rm -rf $(NAME)
-				@printf "[$(GREEN)cleaned$(WHITE)] $(NAME) \n\n"
 
-re:				fclean all
+# **************************************************************************** #
+#                                 COMPILATION                                  #
+# **************************************************************************** #
 
-.PHONY: 		all clean fclean re
 
+CC				 = c++
+
+CFLAGS			 = -Wall -Wextra -Werror -std=c++98
+
+LFLAGS			 = -Wall -Wextra -Werror -std=c++98
+
+INCLUDES		 = -I includes
+
+INCLUDES		+= -I srcs/Webserver/includes
+INCLUDES		+= -I srcs/Server/includes
+
+
+
+# **************************************************************************** #
+#                                    DEBUG                                     #
+# **************************************************************************** #
+
+
+DEBUG			 = true
+
+ifeq ($(DEBUG), true)
+
+	CFLAGS		+= -g3
+
+	LFLAGS		+= -g3
+
+endif
+
+VALGRIND_FLAGS	 = --leak-check=full --show-leak-kinds=all --track-fds=yes
+
+
+
+# **************************************************************************** #
+#                                 SOURCE FILES                                 #
+# **************************************************************************** #
+
+
+SRC_ROOTDIR		= srcs/
+
+SRC_SUBDIR	    = $(MAIN) \
+				  $(addprefix Server/srcs/, $(SERVER)) \
+				  $(addprefix Webserver/srcs/, $(WEBSERVER))
+
+MAIN			= main.cpp
+
+WEBSERVER		= accept_connexion.cpp \
+				  add_client.cpp \
+				  add_to_interest_list.cpp \
+				  constructor.cpp \
+				  create_epoll_socket.cpp \
+				  destructor.cpp \
+				  error.cpp \
+				  exit_webserv.cpp \
+				  launch.cpp \
+				  parse.cpp \
+				  parse_configuration_file.cpp \
+				  parse_server.cpp \
+				  remove_client.cpp \
+				  remove_commentaries.cpp \
+				  replace_blank_characters.cpp \
+				  separate_braces.cpp \
+				  signals.cpp \
+				  split_strings.cpp \
+				  usage.cpp \
+				  wait_event.cpp
+
+SERVER			= bind_server_address.cpp \
+				  constructor.cpp \
+				  create_server_socket.cpp \
+				  destructor.cpp \
+				  listen_for_clients.cpp \
+				  set_server_arguments.cpp
+
+SRCS			= $(addprefix $(SRC_ROOTDIR), $(SRC_SUBDIR))
+
+
+
+# **************************************************************************** #
+#                                 OBJECT FILES                                 #
+# **************************************************************************** #
+
+
+OBJ_ROOTDIR		= objs/
+
+OBJ_SUBDIR		= $(SRC_SUBDIR:.cpp=.o)
+
+OBJ_DIR 		= $(shell find ./srcs -type d | sed s/srcs/objs/)
+
+OBJS			= $(addprefix $(OBJ_ROOTDIR), $(OBJ_SUBDIR))
+
+DEPENDS			:= $(OBJS:.o=.d)
+
+
+
+# **************************************************************************** #
+#                                    COLORS                                    #
+# **************************************************************************** #
+
+
+RED				= \033[31;1m
+
+CYAN			= \033[36;1m
+
+RESET			= \033[0m
+
+
+
+# **************************************************************************** #
+#                               MAKEFILE'S RULES                               #
+# **************************************************************************** #
+
+
+.SILENT : 		all
+
+all : 			header $(NAME) footer
+
+$(OBJ_ROOTDIR)%.o: $(SRC_ROOTDIR)%.cpp
+				@mkdir -p $(OBJ_DIR)
+				$(CC) $(CFLAGS) $(INCLUDES) -MMD -MP -c $< -o $@
+
+$(NAME)	: 		$(OBJS)
+				$(CC) $(LFLAGS) $(OBJS) $(LIBRARY) -o $(NAME)
+				@printf "\n"
+
+leaks :			$(NAME)
+				@valgrind $(VALGRIND_FLAGS) ./$(NAME) $(CONFIG_FILE)
+
+test :			$(NAME)
+				@./$(NAME) $(CONFIG_FILE)
+
+clean :
+				@rm -rf $(OBJ_ROOTDIR) $(DEPENDS)
+				@printf "$(RED)"
+				@printf "Object files removed\n"
+				@printf "$(RESET)"
+
+fclean :
+				@-rm -f $(NAME)
+				@-rm -rf $(OBJ_ROOTDIR) $(DEPENDS)
+				@printf "$(RED)"
+				@printf "Binary and object files removed\n"
+				@printf "$(RESET)"
+
+re :			fclean all
+
+header :
+				@printf "$(CYAN)"
+				@printf "WEBSERV COMPILATION\n"
+				@printf "$(RESET)"
+
+footer :
+				@printf "$(CYAN)"
+				@printf "➤     SUCCESS\n"
+				@printf "\nUSAGE\n"
+				@printf "$(RESET)"
+				@printf "./$(NAME) [configuration file]\n"
+
+
+-include $(DEPENDS)
+
+
+.PHONY : 		all clean fclean bonus re
