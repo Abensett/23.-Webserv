@@ -2,6 +2,10 @@
 
 #define SIGNAL_CAUGHT nb_events == -2
 
+
+using std::cout;
+using std::endl;
+using std::string;
 int		Webserver::launch(void)
 {
 	int					epoll_socket;
