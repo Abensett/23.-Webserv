@@ -67,7 +67,7 @@ int		Webserver::launch(void)
 				recv(events[i].data.fd, request, 1024, 0);
 				std::cout << request << std::endl;
 
-				char * buffer = 0;
+				char * buffer;
 				long length;
 				FILE * f = fopen ("index.html", "rb");
 
