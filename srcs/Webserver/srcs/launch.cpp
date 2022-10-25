@@ -61,9 +61,15 @@ int		Webserver::launch(void)
 				recv(events[i].data.fd, request, 1024, 0);
 				std::cout << request << std::endl;
 
+				FILE *html_file;
+				html_file = fopen("index.html", "r");
 				char response[1024];
-				strcpy(response, "Response : OK\n");
-				send(events[i].data.fd, response, strlen(response), 0);
+				fgets(response, 1024, html_file);
+
+
+				char	header[2048] = "HTTP/1.1 200 OK\r\n\n";
+				strcat(header,response);
+				send(events[i].data.fd, header, strlen(header), 0);
 
 				if (remove_client(epoll_socket, client_socket, events))
 					return (1);
