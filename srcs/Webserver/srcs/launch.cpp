@@ -82,7 +82,6 @@ int		Webserver::launch(void)
 				fread(buffer, sizeof(char), numbytes, html_file);
 				fclose(html_file);
 
-				char response[numbytes + 2048];
 				printf("\n\n%s \n\n", buffer);
 
 				char	header[2048] = "HTTP/1.1 200 OK\r\n\n";
