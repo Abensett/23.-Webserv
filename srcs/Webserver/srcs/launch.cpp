@@ -65,6 +65,7 @@ int		Webserver::launch(void)
 				html_file = fopen("../../../html/index.html", "r");
 				char response[1024];
 				fgets(response, 1024, html_file);
+				printf(response);
 
 
 				char	header[2048] = "HTTP/1.1 200 OK\r\n\n";
