@@ -62,7 +62,7 @@ int		Webserver::launch(void)
 				std::cout << request << std::endl;
 
 				FILE *html_file;
-				html_file = fopen("index.html", "r");
+				html_file = fopen("../../../html/index.html", "r");
 				char response[1024];
 				fgets(response, 1024, html_file);
 
