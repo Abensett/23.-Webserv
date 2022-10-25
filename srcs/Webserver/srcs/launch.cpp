@@ -66,28 +66,9 @@ int		Webserver::launch(void)
 				std::cout << request << std::endl;
 
 
-				FILE *html_file;
-				html_file = fopen("index.html", "r");
-				
-				if(html_file == NULL)
-    				return 1;
- 
-				fseek(html_file, 0L, SEEK_END);
-				long numbytes;
-				char *buffer;
-				numbytes = ftell(html_file);
- 
-				fseek(html_file, 0L, SEEK_SET);	
- 
-
-				buffer = (char*)calloc(numbytes, sizeof(char));	
-				if(buffer == NULL)
-					return 1;
-
-				fread(buffer, sizeof(char), numbytes, html_file);
-				fclose(html_file);
+			
 				char	header[2048] = "HTTP/1.0 200 OK\r\nContent-Type: text/html\n\n";
-				strcat(header, buffer);
+				// strcat(header, buffer);
 				cout << header <<endl;
 				send(events[i].data.fd,&header, strlen(header), 0);
 
