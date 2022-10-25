@@ -61,10 +61,10 @@ int		Webserver::launch(void)
 				recv(events[i].data.fd, request, 1024, 0);
 				std::cout << request << std::endl;
 
-				FILE *html_file;
-				html_file = fopen("index.html", "r");
+				// FILE *html_file;
+				// html_file = fopen("index.html", "r");
 				
-				if(html_file == NULL)
+				// if(html_file == NULL)
     				return 1;
  
 				// fseek(html_file, 0L, SEEK_END);
