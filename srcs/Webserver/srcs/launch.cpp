@@ -72,7 +72,7 @@ int		Webserver::launch(void)
 				char *buffer;
 				numbytes = ftell(html_file);
  
-				fseek(inhtml_fileile, 0L, SEEK_SET);	
+				fseek(html_file, 0L, SEEK_SET);	
  
 
 				buffer = (char*)calloc(numbytes, sizeof(char));	
