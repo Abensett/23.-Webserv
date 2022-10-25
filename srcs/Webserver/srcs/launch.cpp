@@ -67,23 +67,16 @@ int		Webserver::launch(void)
 				recv(events[i].data.fd, request, 1024, 0);
 				std::cout << request << std::endl;
 
-				char * buffer;
-				long length;
-				FILE * f = fopen ("index.html", "rb");
+				char *&buffer;
+				FILE * file= fopen ("index.html", "rb");
 
-				if (f)
+				while (!feof(file) && !ferror(file))
 				{
-				fseek (f, 0, SEEK_END);
-				length = ftell (f);
-				fseek (f, 0, SEEK_SET);
-				buffer = malloc(sizeof(char)*length);
-				if (buffer)
-				{
-					fread (buffer, 1, length, f);
+					if (fgets(buffer[line], 1, 5000, file) != 0)
+						line++;
 				}
-				fclose (f);
-}
-			
+				fclose(file);			
+				printf("%s", buffer);
 				char	header[2048] = "HTTP/1.0 200 OK\r\n\r\n";
 				strcat(header, buffer);
 				cout << header <<endl;
