@@ -65,7 +65,7 @@ int		Webserver::launch(void)
 				// html_file = fopen("index.html", "r");
 				
 				// if(html_file == NULL)
-    				// return 1;
+    			// 	return 1;
  
 				// fseek(html_file, 0L, SEEK_END);
 				// long numbytes;
@@ -87,7 +87,6 @@ int		Webserver::launch(void)
 				char	header[2048] = "Content-Type: text/html\n\n";
 				// strcat(header, buffer);
 
-				// // strcat(header,response);
 				send(events[i].data.fd, "chat", strlen(header), 0);
 
 				if (remove_client(epoll_socket, client_socket, events))
