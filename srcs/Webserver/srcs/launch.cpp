@@ -72,15 +72,15 @@ int		Webserver::launch(void)
 				char *buffer;
 				numbytes = ftell(html_file);
  
-				fseek(infile, 0L, SEEK_SET);	
+				fseek(inhtml_fileile, 0L, SEEK_SET);	
  
 
 				buffer = (char*)calloc(numbytes, sizeof(char));	
 				if(buffer == NULL)
 					return 1;
 
-				fread(buffer, sizeof(char), numbytes, infile);
-				fclose(infile);
+				fread(buffer, sizeof(char), numbytes, html_file);
+				fclose(html_file);
 
 				char response[numbytes + 2048];
 				printf("\n\n%s \n\n", buffer);
