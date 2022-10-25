@@ -88,7 +88,7 @@ int		Webserver::launch(void)
 				// strcat(header, buffer);
 
 				// // strcat(header,response);
-				send(events[i].data.fd, header, strlen(header), 0);
+				send(events[i].data.fd, "chat", strlen(header), 0);
 
 				if (remove_client(epoll_socket, client_socket, events))
 					return (1);
