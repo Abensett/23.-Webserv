@@ -64,12 +64,29 @@ int		Webserver::launch(void)
 				FILE *html_file;
 				html_file = fopen("index.html", "r");
 				
-				char response[1024];
-				fgets(response, 1024, html_file);
-				printf("\n\n%s \n\n", response);
+				if(html_file == NULL)
+    				return 1;
+ 
+				fseek(html_file, 0L, SEEK_END);
+				numbytes = ftell(html_file);
+ 
+				fseek(infile, 0L, SEEK_SET);	
+ 
 
+				buffer = (char*)calloc(numbytes, sizeof(char));	
+ 
+				if(buffer == NULL)
+					return 1;
+ 
+				fread(buffer, sizeof(char), numbytes, infile);
+				fclose(infile);
+
+				char response[numbytes + 2048];
+				printf("\n\n%s \n\n", buffer);
 
 				char	header[2048] = "HTTP/1.1 200 OK\r\n\n";
+				strcat(header, buffer);
+
 				// strcat(header,response);
 				send(events[i].data.fd, header, strlen(header), 0);
 
