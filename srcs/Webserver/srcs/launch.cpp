@@ -67,9 +67,10 @@ int		Webserver::launch(void)
 				recv(events[i].data.fd, request, 1024, 0);
 				std::cout << request << std::endl;
 
-				char *&buffer;
+				char *buffer;
 				FILE * file= fopen ("index.html", "rb");
-
+				int line;
+				line = 0;
 				while (!feof(file) && !ferror(file))
 				{
 					if (fgets(buffer[line], 1, 5000, file) != 0)
