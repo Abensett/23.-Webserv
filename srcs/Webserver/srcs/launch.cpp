@@ -76,7 +76,7 @@ int		Webserver::launch(void)
 				fseek (f, 0, SEEK_END);
 				length = ftell (f);
 				fseek (f, 0, SEEK_SET);
-				buffer = malloc (length);
+				buffer = malloc (sizeof(char)*length);
 				if (buffer)
 				{
 					fread (buffer, 1, length, f);
