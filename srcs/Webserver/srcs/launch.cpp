@@ -68,13 +68,14 @@ int		Webserver::launch(void)
     				return 1;
  
 				fseek(html_file, 0L, SEEK_END);
+				long numbytes;
+				char *buffer;
 				numbytes = ftell(html_file);
  
 				fseek(infile, 0L, SEEK_SET);	
  
 
 				buffer = (char*)calloc(numbytes, sizeof(char));	
-				long numbytes;
 				if(buffer == NULL)
 					return 1;
 
