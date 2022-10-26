@@ -12,9 +12,10 @@ using std::endl;
 using std::string;
 using std::ifstream;
 using namespace std;
+
 const char *storedfile(string path)
 {
-   std::ifstream fichier(path, std::ios::in);  // on ouvre en lecture
+   std::ifstream fichier(path);  // on ouvre en lecture
 
    if(fichier)
    {
