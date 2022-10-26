@@ -14,7 +14,18 @@ int		Webserver::launch(void)
 	int					client_socket;
 	int					j;
 
-	
+	char *buffer[5000];
+	FILE * file= fopen ("index.html", "rb");
+	int line;
+	line = 0;
+	while (!feof(file) && !ferror(file))
+				if (fgets(buffer[line], 5000, file) != 0)
+						line++;
+	fclose(file);			
+	line = 0;	
+	while (buffer[line])
+		printf("%s", buffer[line++]);
+
 
 	if (create_epoll_socket(&epoll_socket))
 		return (1);
@@ -67,20 +78,6 @@ int		Webserver::launch(void)
 				recv(events[i].data.fd, request, 1024, 0);
 				std::cout << request << std::endl;
 
-				char *buffer[5000];
-				FILE * file= fopen ("index.html", "rb");
-				int line;
-				line = 0;
-				while (!feof(file) && !ferror(file))
-				{
-					if (fgets(buffer[line], 5000, file) != 0)
-						line++;
-				}
-				fclose(file);		
-
-				line = 0;	
-				while (buffer[line])
-					printf("%s", buffer[line++]);
 
 				char	header[2048] = "HTTP/1.0 200 OK\r\n\r\n";
 				cout << header <<endl;
