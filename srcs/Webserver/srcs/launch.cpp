@@ -11,7 +11,7 @@ using std::cout;
 using std::endl;
 using std::string;
 using std::ifstream;
-
+using namespace std;
 const char *storedfile(string path)
 {
    std::ifstream fichier(path, std::ios::in);  // on ouvre en lecture
@@ -111,7 +111,7 @@ int		Webserver::launch(void)
 				recv(events[i].data.fd, request, 1024, 0);
 				std::cout << request << std::endl;
 
-				const char *response = storedfile("index.html");
+				// const char *response = storedfile("index.html");
 
 				send(events[i].data.fd, &response, strlen(response), 0);
 
