@@ -1,6 +1,8 @@
 #include "Webserver.hpp"
+#include<string.h>
 
 #define SIGNAL_CAUGHT nb_events == -2
+#include <fstream>
 
 using std::cout;
 using std::endl;
