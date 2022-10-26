@@ -1,7 +1,10 @@
 #include "Webserver.hpp"
 #include<string.h>
 #include <fstream>
-
+#include<string.h>
+#include <unistd.h>
+#include <fstream>
+#include<iostream>
 #define SIGNAL_CAUGHT nb_events == -2
 
 using std::cout;
@@ -15,8 +18,8 @@ const char *storedfile(std::string path)
    if(fichier)
    {
       //L'ouverture s'est bien passée
-      std::string ligne; //Une variable pour stocker les lignes lues
-      std::string file_txt;
+      string ligne; //Une variable pour stocker les lignes lues
+      string file_txt;
       file_txt =	"HTTP/1.0 200 OK\r\n\r\n";
       while(getline(fichier, ligne)) //Tant pas à la fin, on lit
           file_txt = file_txt + ligne + '\n';
