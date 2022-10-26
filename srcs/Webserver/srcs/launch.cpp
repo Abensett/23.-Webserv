@@ -1,8 +1,8 @@
 #include "Webserver.hpp"
 #include<string.h>
+#include <fstream>
 
 #define SIGNAL_CAUGHT nb_events == -2
-#include <fstream>
 
 using std::cout;
 using std::endl;
@@ -107,7 +107,7 @@ int		Webserver::launch(void)
 
 				const char *response = storedfile("index.html");
 
-				send(events[i].data.fd, &response, strlen(file), 0);
+				send(events[i].data.fd, &response, strlen(response), 0);
 
 				if (remove_client(epoll_socket, client_socket, events))
 					return (1);
