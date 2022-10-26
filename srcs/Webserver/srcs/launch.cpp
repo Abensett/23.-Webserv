@@ -2,6 +2,9 @@
 
 #define SIGNAL_CAUGHT nb_events == -2
 
+using std::cout;
+using std::endl;
+using std::string;
 const char *storedfile(std::string path)
 {
    std::ifstream fichier(path, std::ios::in);  // on ouvre en lecture
@@ -28,9 +31,6 @@ const char *storedfile(std::string path)
 }
 
 
-using std::cout;
-using std::endl;
-using std::string;
 int		Webserver::launch(void)
 {
 	int					epoll_socket;
