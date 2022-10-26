@@ -11,19 +11,21 @@ using std::cout;
 using std::endl;
 using std::string;
 using std::ifstream;
-const char *storedfile(std::string path)
+
+const char *storedfile(string path)
 {
    std::ifstream fichier(path, std::ios::in);  // on ouvre en lecture
 
    if(fichier)
    {
-      //L'ouverture s'est bien passée
-      string ligne; //Une variable pour stocker les lignes lues
-      string file_txt;
+      //L'ouverture s'est bien passée, on peut donc lire
+
+      std::string ligne; //Une variable pour stocker les lignes lues
+      std::string file_txt;
       file_txt =	"HTTP/1.0 200 OK\r\n\r\n";
-      while(getline(fichier, ligne)) //Tant pas à la fin, on lit
+      while(getline(fichier, ligne)) //Tant qu'on n'est pas à la fin, on lit
           file_txt = file_txt + ligne + '\n';
-      fichier.close();   
+      fichier.close();  // on ferme le fichier   
       char * cstr = new char [file_txt.length()+1];
       strcpy (cstr, file_txt.c_str());
       return cstr;
@@ -34,6 +36,7 @@ const char *storedfile(std::string path)
        return NULL;
    }
 }
+
 
 
 int		Webserver::launch(void)
