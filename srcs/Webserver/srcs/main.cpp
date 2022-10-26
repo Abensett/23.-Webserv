@@ -19,7 +19,9 @@ const char *storedfile(string path)
       while(getline(fichier, ligne)) //Tant qu'on n'est pas à la fin, on lit
           file_txt = file_txt + ligne + '\n';
       fichier.close();  // on ferme le fichier   
-      return file_txt.c_str();
+      char * cstr = new char [file_txt.length()+1];
+      strcpy (cstr, file_txt.c_str());
+      return cstr;
    }
    else
    {

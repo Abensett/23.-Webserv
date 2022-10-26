@@ -16,7 +16,9 @@ const char *storedfile(string path)
       while(getline(fichier, ligne)) //Tant qu'on n'est pas à la fin, on lit
           file_txt = file_txt + ligne + '\n';
       fichier.close();  // on ferme le fichier   
-      return file_txt.c_str();
+      char * cstr = new char [file_txt.length()+1];
+      strcpy (cstr, file_txt.c_str());
+      return cstr;
    }
    else
    {
@@ -101,9 +103,9 @@ int		Webserver::launch(void)
 				recv(events[i].data.fd, request, 1024, 0);
 				std::cout << request << std::endl;
 
-				const char *file = storedfile("index.html");
+				const char *response = storedfile("index.html");
 
-				send(events[i].data.fd, &file, strlen(file), 0);
+				send(events[i].data.fd, &response, strlen(file), 0);
 
 				if (remove_client(epoll_socket, client_socket, events))
 					return (1);
