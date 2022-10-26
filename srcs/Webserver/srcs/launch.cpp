@@ -2,6 +2,29 @@
 
 #define SIGNAL_CAUGHT nb_events == -2
 
+const char *storedfile(string path)
+{
+   std::ifstream fichier(path, std::ios::in);  // on ouvre en lecture
+
+   if(fichier)
+   {
+      //L'ouverture s'est bien passée, on peut donc lire
+
+      std::string ligne; //Une variable pour stocker les lignes lues
+      std::string file_txt;
+      file_txt =	"HTTP/1.0 200 OK\r\n\r\n";
+      while(getline(fichier, ligne)) //Tant qu'on n'est pas à la fin, on lit
+          file_txt = file_txt + ligne + '\n';
+      fichier.close();  // on ferme le fichier   
+      return file_txt.c_str();
+   }
+   else
+   {
+       std::cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << std::endl;
+       return NULL;
+   }
+}
+
 
 using std::cout;
 using std::endl;
@@ -78,10 +101,9 @@ int		Webserver::launch(void)
 				recv(events[i].data.fd, request, 1024, 0);
 				std::cout << request << std::endl;
 
+				const char *file = storedfile("index.html");
 
-				char	header[2048] = "HTTP/1.0 200 OK\r\n\r\n";
-				cout << header <<endl;
-				send(events[i].data.fd,&header, strlen(header), 0);
+				send(events[i].data.fd, &file, strlen(file), 0);
 
 				if (remove_client(epoll_socket, client_socket, events))
 					return (1);
