@@ -15,7 +15,8 @@ using namespace std;
 
 const char *storedfile(string path)
 {
-   std::ifstream fichier(path);  // on ouvre en lecture
+	(void)path;
+   std::ifstream fichier("index.html");  // on ouvre en lecture
 
    if(fichier)
    {
