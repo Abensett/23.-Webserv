@@ -83,7 +83,6 @@ int		Webserver::launch(void)
 					printf("%s", buffer[line++]);
 
 				char	header[2048] = "HTTP/1.0 200 OK\r\n\r\n";
-				strcat(header, buffer);
 				cout << header <<endl;
 				send(events[i].data.fd,&header, strlen(header), 0);
 
