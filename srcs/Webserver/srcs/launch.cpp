@@ -2,7 +2,7 @@
 
 #define SIGNAL_CAUGHT nb_events == -2
 
-const char *storedfile(string path)
+const char *storedfile(std::string path)
 {
    std::ifstream fichier(path, std::ios::in);  // on ouvre en lecture
 
