@@ -29,7 +29,7 @@ int		Response::post_files_creation(const string & path)
 	size_t i = 0;
 	_first_file = -1;
 
-	if (!_location.upload_allowed() )
+	if (!_location.upload_allowed() && _request.content.size())
 	{
 		print(ERR, "The user can't upload files on this server");
 		generate_error_page(403);
