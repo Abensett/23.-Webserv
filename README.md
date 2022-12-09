@@ -1,13 +1,4 @@
-# Template
+# webserv
+A HTTP server in C++ 98
 
-## Table of contents
-* [Part 1](#Part)  
-* [Part 2](#Reinterpretation-types)  
-
-### Part
->  Little explanation
-```C
-int main (void)
-{
-}
-```
+[![Compilation test](https://github.com/cmariot/webserv/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/cmariot/webserv/actions/workflows/c-cpp.yml)

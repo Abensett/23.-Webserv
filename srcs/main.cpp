@@ -1,24 +1,18 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 15:21:52 by cmariot           #+#    #+#             */
-/*   Updated: 2022/10/21 04:05:13 by cmariot          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "Webserver.hpp"
 
-#include "webserv.hpp"
-
-int	main(int argc, const char *argv[])
+int	main(const int argc, const char *argv[], char * const *env)
 {
 	Webserver	webserv;
 
-	if (webserv.parse(argc, argv))
-		return (1);
-	if (webserv.launch())
-		return (1);
+	if (webserv.parse(argc, argv, env))
+		return (0);
+	try
+	{
+		webserv.launch();
+	}
+	catch (const std::bad_alloc & exception)
+	{
+		return (error(exception.what(), " - Allocation failed."));
+	}
 	return (0);
-}
+};
