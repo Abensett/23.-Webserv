@@ -127,7 +127,7 @@ void	Response::post_response(void)
 		if (_is_admin)
 			generate_post_response(200);
 		else
-			generate_post_response(403);
+			generate_error_page(403);
 	}
 	else if (_request.content.size() && _first_file != -1)
 		generate_post_response(201);
