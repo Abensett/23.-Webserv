@@ -16,6 +16,23 @@
 # define CHILD_WRITE_FD		( pipes[PARENT_READ_PIPE][WRITE_FD]  )
 # define CHILD_READ_FD		( pipes[PARENT_WRITE_PIPE][READ_FD]  )
 
+
+int	check_cgi_extension(const char *filename, const char *extension)
+{
+	size_t	filename_len;
+	size_t	extension_len;
+
+	filename_len = strlen(filename);
+	extension_len = strlen(extension);
+	if (filename_len-- < extension_len--)
+		return (1);
+	while (extension_len + 1 != 0)
+		if (filename[filename_len--] != extension[extension_len--])
+			return (1);
+	return (0);
+}
+
+
 int Response::generate_cgi_response(void)
 {
     int		pid;
@@ -46,9 +63,9 @@ int Response::generate_cgi_response(void)
 		return (error("Fork failed in the CGI."));
 	else if (pid == 0)
 	{
-		if (check_extension(_path, ".php") == 0)
+		if (check_cgi_extension(_path, ".php") == 0)
 			cgi_args[0] = (char *)"/bin/php-cgi";
-		else if (check_extension(_path, ".py") == 0)
+		else if (check_cgi_extension(_path, ".py") == 0)
 			cgi_args[0] = (char *)"/usr/bin/python3";
 		else
 			return (error("Unknown extension"));
