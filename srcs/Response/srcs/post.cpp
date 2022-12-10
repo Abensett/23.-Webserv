@@ -122,7 +122,7 @@ void 	Response::generate_post_response(int	status_code)
 void	Response::post_response(void)
 {
 
-	if (_request.file_name.find("Username") != std::string::npos || _request.file_name.find("Password") != std::string::npos)
+	if (_request.login_info.first != "" && _request.login_info.second != "")
 	{
 		if (_is_admin)
 			generate_post_response(200);
