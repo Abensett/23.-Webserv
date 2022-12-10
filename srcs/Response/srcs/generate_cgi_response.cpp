@@ -63,9 +63,9 @@ int Response::generate_cgi_response(void)
 		return (error("Fork failed in the CGI."));
 	else if (pid == 0)
 	{
-		if (check_cgi_extension(_path, ".php") == 0)
+		if (check_cgi_extension(_path.c_str(), ".php") == 0)
 			cgi_args[0] = (char *)"/bin/php-cgi";
-		else if (check_cgi_extension(_path, ".py") == 0)
+		else if (check_cgi_extension(_path.c_str(), ".py") == 0)
 			cgi_args[0] = (char *)"/usr/bin/python3";
 		else
 			return (error("Unknown extension"));
