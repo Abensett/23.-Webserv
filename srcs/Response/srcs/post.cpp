@@ -151,9 +151,9 @@ void    Response::post_method(void)
 
 	_is_admin = false;
 
-	if (_request._login_info.first != "" && _request._login_info.second != "")
+	if (_request.login_info.first != "" && _request.login_info.second != "")
 	{
-		if (check_login(_request._login_info.first, _request._login_info.second))
+		if (check_login(_request.login_info.first, _request.login_info.second))
 			_is_admin = true;
 		else
 			_is_admin = false;
