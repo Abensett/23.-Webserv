@@ -31,8 +31,9 @@ static bool	get_file(const std::string & path, std::string & file_content)
 void	Response::generate_file_response(void)
 {
 	cout << "This is the cookie" << _header.find("Cookie") << endl;
-	
-	if (_path == "./html/first/cookies/cookies.html" && _header.find("Cookie")->second == "Admin=true" &&
+	std::multimap<string, string>::iterator	cookies = _header.find("Content-Type");
+
+	if (_path == "./html/first/cookies/cookies.html" && _header.find("cookies")->second == "Admin=true" &&
 		get_file("./html/first/cookies/cookies_already_logged.html", _body))
 	{
 		_path = "./html/first/cookies/cookies_already_logged.html";
