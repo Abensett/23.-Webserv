@@ -40,6 +40,11 @@ int		Response::post_files_creation(const string & path)
 	{
 		string infile(_request.file_name[i]);
 
+		if (_request.file_name[i] == "Username" || _request.file_name[i] == "Password")
+		{
+			i++;
+			continue;
+		}
 		std::ofstream fout;
 		infile = path + infile;
 		print(INFO, "File about to be uploaded");
@@ -111,6 +116,7 @@ void 	Response::generate_post_response(int	status_code)
 
 void	Response::post_response(void)
 {
+
 	if (_request.content.size() && _first_file != -1)
 		generate_post_response(201);
 	else if (_request.content.size() && _first_file == -1)
