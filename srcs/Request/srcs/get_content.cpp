@@ -21,9 +21,9 @@ int Request::get_file_name(size_t i)
 		content[i].find("name=\"Password\"") != std::string::npos)
 	{
 		file_name.back() = content[i].substr(content[i].find("name=") + 6, content[i].find("\r\n") - content[i].find("name=") - 7);
-		if (content.find("name=\"Username\"") != std::string::npos)
+		if (content[i].find("name=\"Username\"") != std::string::npos)
 			login_info.first = file_name.back();
-		else if (content.find("name=\"Password\"" != std::string::npos))
+		else if (content[i].find("name=\"Password\"" != std::string::npos))
 			login_info.second = file_name.back();
 		return (0);
 	}
