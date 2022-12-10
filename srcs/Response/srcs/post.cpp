@@ -122,7 +122,7 @@ void 	Response::generate_post_response(int	status_code)
 void	Response::post_response(void)
 {
 
-	if (_request.find("Username") != std::string::npos || _request.find("Password") != std::string::npos)
+	if (_request.file_name.find("Username") != std::string::npos || _request.file_name.find("Password") != std::string::npos)
 	{
 		if (_is_admin)
 			generate_post_response(200);
@@ -141,9 +141,9 @@ void    Response::post_method(void)
 {
    	_request.get_content();
 
-	if (_request.find("Username") != std::string::npos || _request.find("Password") != std::string::npos)
+	if (_request.file_name.find("Username") != std::string::npos || _request.file_name.find("Password") != std::string::npos)
 	{
-		if( _request.find("Username") == "admin" && _request.find("Password") == "admin")
+		if( _request.file_name.find("Username") == "admin" && _request.file_name.find("Password") == "admin")
 			_is_admin = true;
 		else
 			_is_admin = false;
