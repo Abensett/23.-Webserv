@@ -19,7 +19,6 @@ class	Request
 		Request(void);
 		~Request(void);
 	
-		int 			  	login;
 
 		void								add_to_request(const char *, const ssize_t &);
 		bool								is_ready(void);
@@ -48,6 +47,9 @@ class	Request
 		void				reset(void);
 
 		string 				boundary;
+		string 				boundary2;
+		bool 			  	login;
+
 		vector<string>		content;
 		vector<string> 		file_name;
 		vector<string>		body_content;

@@ -5,7 +5,6 @@ int Request::get_file_name(size_t i)
 {
 	size_t		pos;
 	
-	login = 0;
 
 	file_name.push_back("");
 	pos = content[i].find("filename=");
@@ -99,6 +98,7 @@ int	Request::get_boundary_content(void)
 void Request::reset(void)
 {
 	login = 0;
+	boundary2 = 1;
 	content.clear();
 	file_name.clear();
 	content_type.clear();
