@@ -137,6 +137,13 @@ void	Response::post_response(void)
 		generate_post_response(204);
 }
 
+static check_login (string username, string password)
+{
+	if (username == "admin" && password == "admin")
+		return (true);
+	return (false);
+}
+
 void    Response::post_method(void)
 {
    	_request.get_content();
@@ -144,9 +151,9 @@ void    Response::post_method(void)
 
 	_is_admin = false;
 
-	if ()
+	if (_request._login.first != "" && _request._login.second != "")
 	{
-		if( _request.file_name.find("Username") == "admin" && _request.file_name.find("Password") == "admin")
+		if (check_login(_request._login.first, _request._login.second))
 			_is_admin = true;
 		else
 			_is_admin = false;
@@ -161,7 +168,6 @@ void    Response::post_method(void)
 		if (post_files_creation(folder_path) && _request.content.size())
 			return;
 	}
-
 	post_response();
 }
 
