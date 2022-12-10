@@ -100,7 +100,7 @@ void 	Response::generate_post_response(int	status_code)
 	_header  = _request.get_http_version() + " " + itostring(status_code) + " " + _status_code_map.find(status_code)->second + "\r\n";
 	if (status_code == 200 && _is_admin)
 	{
-		_header += "Set-Cookie: admin=true\r\n";
+		_header += "Set-Cookie: admin=true; Max-Age=60\r\n";
 		_body = "You are now logged in as an admin !";
 	}
 	else if (status_code == 201)
