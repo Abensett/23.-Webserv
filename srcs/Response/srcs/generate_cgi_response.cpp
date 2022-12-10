@@ -46,7 +46,12 @@ int Response::generate_cgi_response(void)
 		return (error("Fork failed in the CGI."));
 	else if (pid == 0)
 	{
-		cgi_args[0] = (char *)"/bin/php-cgi";
+		if (check_extension(argv[1], ".php") == 0)
+			cgi_args[0] = (char *)"/bin/php-cgi";
+		else if (check_extension(argv[1], ".py") == 0)
+			cgi_args[0] = (char *)"/usr/bin/python3";
+		else
+			return (error("Unknown extension"));
 		cgi_args[1] = (char *)full_path.c_str();
 		cgi_args[2] = NULL;
 		// Chdir path
