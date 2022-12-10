@@ -100,8 +100,13 @@ void 	Response::generate_post_response(int	status_code)
 	_header  = _request.get_http_version() + " " + itostring(status_code) + " " + _status_code_map.find(status_code)->second + "\r\n";
 	if (status_code == 200 && _is_admin)
 	{
-		_header += "Set-Cookie: admin=true; Max-Age=60\r\n";
+		_header += "Set-Cookie: admin=true\r\n";
 		_body = "You are now logged in as an admin !";
+	}
+	else if (status_code == 200 && _is_guest)
+	{
+		_header += "Set-Cookie: guest=true; Max-Age=60\r\n";
+		_body = "You are now logged in as a guest !";
 	}
 	else if (status_code == 201)
 	{
@@ -124,7 +129,7 @@ void	Response::post_response(void)
 
 	if (_request.login_info.first != "" && _request.login_info.second != "")
 	{
-		if (_is_admin)
+		if (_is_admin || _is_guest)
 			generate_post_response(200);
 		else
 			generate_error_page(401);
@@ -144,21 +149,29 @@ static bool check_login (string username, string password)
 	return (false);
 }
 
+static bool check_login_guest(string username, string password)
+{
+	if (username == "guest" && password == "guest")
+		return (true);
+	return (false);
+}
+
+
 void    Response::post_method(void)
 {
    	_request.get_content();
-   
+
 
 	_is_admin = false;
-
+	_is_guest = false;
 	if (_request.login_info.first != "" && _request.login_info.second != "")
 	{
 		if (check_login(_request.login_info.first, _request.login_info.second))
 			_is_admin = true;
-		else
-			_is_admin = false;
+		else if (check_login_guest(_request.login_info.first, _request.login_info.second))
+			_is_guest = true;
 	}
-	else 
+	else
 	{
 		string folder_path = _location.root() + _location.get_upload_path();
 

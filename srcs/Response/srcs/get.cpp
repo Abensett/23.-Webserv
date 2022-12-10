@@ -24,10 +24,7 @@ static bool	get_file(const std::string & path, std::string & file_content)
 		return (false);
 	return (true);
 };
-// static 		void already_logged_in(void)
-// {
 
-// }
 void	Response::generate_file_response(void)
 {
 
@@ -37,6 +34,13 @@ void	Response::generate_file_response(void)
 	{
 		_path = "./html/first/cookies/cookies_already_logged.html";
 	}
+	else if(_request.get_header().find("Cookie")!= _request.get_header().end() &&
+		_path == "./html/first/cookies/cookies.html" && _request.get_header().find("Cookie")->second == "guest=true" &&
+		get_file("./html/first/cookies/cookies_already_logged_guest.html", _body))
+	{
+		_path = "./html/first/cookies/cookies_already_logged_guest.html";
+	}
+
 	if (get_file(_path, _body))
 	{
 		const int			& status_code	= 200;
@@ -49,6 +53,7 @@ void	Response::generate_file_response(void)
 	else
 		return (generate_error_page(502));
 };
+
 
 bool	Response::use_cgi(void) const
 {

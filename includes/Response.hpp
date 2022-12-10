@@ -39,8 +39,9 @@ class Response
 		std::string							_body;
 		std::string							_response;
 		std::string							_path;
-		bool 								_is_admin;	
-
+		bool 								_is_admin;
+		bool								_is_guest;
+		
 		// Update
 		int									get_location(void);
 
