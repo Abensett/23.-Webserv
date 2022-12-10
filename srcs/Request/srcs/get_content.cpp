@@ -127,6 +127,7 @@ int Request::get_content(void)
 			file_name.pop_back();
 			continue;
 		}
+		cout << file_name[i] << endl;
 		get_content_type(i);
 		get_body_content(i);
 		i++;
