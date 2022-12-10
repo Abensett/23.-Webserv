@@ -98,7 +98,7 @@ int	Request::get_boundary_content(void)
 void Request::reset(void)
 {
 	login = 0;
-	boundary2 = 1;
+	boundary2 ="1";
 	content.clear();
 	file_name.clear();
 	content_type.clear();
