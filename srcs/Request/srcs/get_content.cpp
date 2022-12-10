@@ -20,7 +20,7 @@ int Request::get_file_name(size_t i)
 		content[i].find("name=\"Password\"") != std::string::npos)
 	{
 		file_name.back() = content[i].substr(content[i].find("name=") + 6, content[i].find("\r\n") - content[i].find("name=") - 6);
-		login = true;
+		this.login = true;
 		return (0);
 	}
 	else
@@ -97,7 +97,7 @@ int	Request::get_boundary_content(void)
 
 void Request::reset(void)
 {
-	login = false;
+	this.login = false;
 	content.clear();
 	file_name.clear();
 	content_type.clear();
