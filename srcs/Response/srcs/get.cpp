@@ -38,7 +38,7 @@ void	Response::generate_file_response(void)
 	{
 		_path = "./html/first/cookies/cookies_already_logged.html";
 	}
-	else if (get_file(_path, _body))
+	if (get_file(_path, _body))
 	{
 		const int			& status_code	= 200;
 		const std::string	& code			= itostring(status_code);
