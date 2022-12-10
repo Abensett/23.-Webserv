@@ -52,8 +52,8 @@ Response::Response(void) :
 	_no_location(false),
 	_header(""),
 	_body(""),
-	_response(""),
-	_is_admin(false)
+	_is_admin(false),
+	_response("")
 {
 	return ;
 };
