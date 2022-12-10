@@ -30,9 +30,9 @@ static bool	get_file(const std::string & path, std::string & file_content)
 // }
 void	Response::generate_file_response(void)
 {
-	cout << "This is the cookie" << _header.find("Cookie") << endl;
+	cout << "This is the cookie" << _request.get_header().find("Cookie") << endl;
 
-	if (_path == "./html/first/cookies/cookies.html" && _request.get_header().find("Cookie")->second == "Admin=true" &&
+	if (_path == "./html/first/cookies/cookies.html" && _request.get_header().find("Cookie")->second == "admin=true" &&
 		get_file("./html/first/cookies/cookies_already_logged.html", _body))
 	{
 		_path = "./html/first/cookies/cookies_already_logged.html";
