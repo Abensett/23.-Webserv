@@ -27,6 +27,7 @@ static bool	get_file(const std::string & path, std::string & file_content)
 
 void	Response::generate_file_response(void)
 {
+	cout << _path << endl;
 	if (get_file(_path, _body))
 	{
 		const int			& status_code	= 200;
