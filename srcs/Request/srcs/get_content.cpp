@@ -105,7 +105,8 @@ void Request::reset(void)
 	file_name.clear();
 	content_type.clear();
 	body_content.clear();
-	login_info.clear();
+	login_info.first="";
+	login_info.second="";
 }
 
 // This function stores the different infos of files in 3 vectors : name, type, content
