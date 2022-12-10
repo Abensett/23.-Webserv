@@ -48,7 +48,6 @@ class	Request
 
 		string 				boundary;
 		string 				boundary2;
-		bool 			  	login;
 
 		vector<string>		content;
 		vector<string> 		file_name;

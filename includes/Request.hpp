@@ -44,7 +44,7 @@ class	Request
 		int					set_content(void);
 
 		void				reset(void);
-
+		bool 			  	login;
 		string 				boundary;
 		vector<string>		content;
 		vector<string> 		file_name;
@@ -52,7 +52,7 @@ class	Request
 		vector<string>		content_type;
 
 	private:
-
+		
 		std::string							_request;			// Full request
 		std::string							_request_line;		// 1st line of the request
 		std::string							_method;			// GET, POST, DELETE
