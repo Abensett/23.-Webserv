@@ -53,7 +53,7 @@ Response::Response(void) :
 	_header(""),
 	_body(""),
 	_response(""),
-	_is_admin(false),
+	_is_admin(false)
 {
 	return ;
 };
