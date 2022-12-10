@@ -72,7 +72,7 @@ int Response::generate_cgi_response(void)
 		else if (check_cgi_extension(_path.c_str(), ".py") == 0)
 		{
 			cout << "ON RENTRE LA !" << endl;
-			cgi_args[0] = (char *)"/usr/bin/python3";
+			cgi_args[0] = (char *)"/bin/python3";
 		}
 		else
 			return (error("Unknown extension"));
