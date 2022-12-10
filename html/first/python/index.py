@@ -5,6 +5,7 @@ import cgi, cgitb
 # form = cgi.FieldStorage()
 
 print ("Content-type:text/html")
+print()
 print ("<html>")
 print ("<head>")
 print ("<title>First CGI Program</title>")
