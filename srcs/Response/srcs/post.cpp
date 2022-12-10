@@ -137,7 +137,7 @@ void	Response::post_response(void)
 		generate_post_response(204);
 }
 
-static check_login (string username, string password)
+static bool check_login (string username, string password)
 {
 	if (username == "admin" && password == "admin")
 		return (true);
