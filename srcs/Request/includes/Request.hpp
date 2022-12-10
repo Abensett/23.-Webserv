@@ -44,7 +44,8 @@ class	Request
 		int					set_content(void);
 
 		void				reset(void);
-
+		
+		bool 				_login;
 		string 				boundary;
 		vector<string>		content;
 		vector<string> 		file_name;
