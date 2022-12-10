@@ -63,6 +63,7 @@ int Response::generate_cgi_response(void)
 		return (error("Fork failed in the CGI."));
 	else if (pid == 0)
 	{
+		cout << _path << endl;
 		if (check_cgi_extension(_path.c_str(), ".php") == 0)
 		{
 			cout << "ON RENTRE LA  PHP !" << endl;
