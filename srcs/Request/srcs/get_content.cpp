@@ -127,8 +127,8 @@ int Request::get_content(void)
 		}
 		cout << file_name[i] << endl;
 		get_content_type(i);
-		cout << content_type[i] << endl;
 		get_body_content(i);
+		cout << body_content[i] << endl;
 		i++;
 	}
 	return (0);
