@@ -21,10 +21,6 @@ int Request::get_file_name(size_t i)
 		content[i].find("name=\"Password\"") != std::string::npos)
 	{
 		file_name.back() = content[i].substr(content[i].find("name=") + 6, content[i].find("\r\n") - content[i].find("name=") - 7);
-		if (content[i].find("name=\"Username\"") != std::string::npos)
-			login_info.first = file_name.back();
-		else if (content[i].find("name=\"Password\"") != std::string::npos)
-			login_info.second = file_name.back();
 		return (0);
 	}
 	else
@@ -63,6 +59,10 @@ int Request::get_body_content(size_t i)
 		{
 			body_content[i] += content[i][pos++];
 		}
+		if (file_name[i] == "Username")
+			login_info.first = body_content[i];
+		else if (file_name[i] == "Password")
+			login_info.second = body_content[i];
 	}
 	return (0);
 };
@@ -131,11 +131,11 @@ int Request::get_content(void)
 			file_name.pop_back();
 			continue;
 		}
-		cout << file_name[i] << endl;
+		// cout << file_name[i] << endl;
 		get_content_type(i);
 		get_body_content(i);
-		cout << body_content[i] << endl;
-		cout << "longin :"<<login_info.first <<" Pass" << login_info.second << endl; 
+		// cout << body_content[i] << endl;
+		cout << "longin :"<< login_info.first <<" Pass" << login_info.second << endl; 
 		i++;
 	}
 	return (0);
