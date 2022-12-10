@@ -17,7 +17,7 @@
 # define CHILD_READ_FD		( pipes[PARENT_WRITE_PIPE][READ_FD]  )
 
 
-int	check_cgi_extension(const char filename, const char *extension)
+int	check_cgi_extension(const char *filename, const char *extension)
 {
 	size_t	filename_len;
 	size_t	extension_len;
