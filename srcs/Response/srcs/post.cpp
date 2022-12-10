@@ -98,7 +98,12 @@ void 	Response::generate_post_response(int	status_code)
 	_body += 		"</style>";
 
 	_header  = _request.get_http_version() + " " + itostring(status_code) + " " + _status_code_map.find(status_code)->second + "\r\n";
-	if (status_code == 201)
+	if (status_code == 200 && _is_admin)
+	{
+		_header += "Set-Cookie: admin=true\r\n";
+		_body = "You are now logged in as an admin !";
+	}
+	else if (status_code == 201)
 	{
 		_header += "Location: " + _location.get_upload_path() + _request.file_name[0] + "\r\n";
 		_body = "Your file has been uploaded ! Click <A href=";
@@ -117,7 +122,14 @@ void 	Response::generate_post_response(int	status_code)
 void	Response::post_response(void)
 {
 
-	if (_request.content.size() && _first_file != -1)
+	if (_request.find("Username") != std::string::npos || _request.find("Password") != std::string::npos)
+	{
+		if (_is_admin)
+			generate_post_response(200);
+		else
+			generate_post_response(403);
+	}
+	else if (_request.content.size() && _first_file != -1)
 		generate_post_response(201);
 	else if (_request.content.size() && _first_file == -1)
 		generate_post_response(200);
@@ -129,13 +141,24 @@ void    Response::post_method(void)
 {
    	_request.get_content();
 
-	string folder_path = _location.root() + _location.get_upload_path();
+	if (_request.find("Username") != std::string::npos || _request.find("Password") != std::string::npos)
+	{
+		if( _request.find("Username") == "admin" && _request.find("Password") == "admin")
+			_is_admin = true;
+		else
+			_is_admin = false;
+	}
+	else 
+	{
+		string folder_path = _location.root() + _location.get_upload_path();
 
-	cout << "folder_upload : " << folder_path << endl;
-	if (make_dir_if_not_exist(folder_path))
-		return(generate_error_page(500));
-	if (post_files_creation(folder_path) && _request.content.size())
-		return;
+		cout << "folder_upload : " << folder_path << endl;
+		if (make_dir_if_not_exist(folder_path))
+			return(generate_error_page(500));
+		if (post_files_creation(folder_path) && _request.content.size())
+			return;
+	}
+
 	post_response();
 }
 
