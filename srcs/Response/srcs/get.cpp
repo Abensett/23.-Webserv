@@ -24,11 +24,19 @@ static bool	get_file(const std::string & path, std::string & file_content)
 		return (false);
 	return (true);
 };
+static 		void already_logged_in(void)
+{
 
+}
 void	Response::generate_file_response(void)
 {
-	cout << _path << endl;
-	if (get_file(_path, _body))
+	cout << "This is the cookie" << _header.find("Cookie") << endl;
+	
+	if (_path == "./html/first/cookies/cookies.html" && _header.find("Cookie") == "Admin=true" &&
+		get_file("./html/first/cookies/cookies_already_logged.html", _body))
+	{
+	}
+	else if (get_file(_path, _body))
 	{
 		const int			& status_code	= 200;
 		const std::string	& code			= itostring(status_code);
