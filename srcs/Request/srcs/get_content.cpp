@@ -4,6 +4,8 @@
 int Request::get_file_name(size_t i)
 {
 	size_t		pos;
+	
+	login = 0;
 
 	file_name.push_back("");
 	pos = content[i].find("filename=");
@@ -20,7 +22,6 @@ int Request::get_file_name(size_t i)
 		content[i].find("name=\"Password\"") != std::string::npos)
 	{
 		file_name.back() = content[i].substr(content[i].find("name=") + 6, content[i].find("\r\n") - content[i].find("name=") - 6);
-		login = 1;
 		return (0);
 	}
 	else
