@@ -140,9 +140,11 @@ void	Response::post_response(void)
 void    Response::post_method(void)
 {
    	_request.get_content();
+   
 
 	_is_admin = false;
-	if (_request.file_name.find("Username") != std::string::npos || _request.file_name.find("Password") != std::string::npos)
+
+	if ()
 	{
 		if( _request.file_name.find("Username") == "admin" && _request.file_name.find("Password") == "admin")
 			_is_admin = true;

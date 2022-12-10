@@ -50,6 +50,7 @@ class	Request
 		vector<string> 		file_name;
 		vector<string>		body_content;
 		vector<string>		content_type;
+		std::pair			< std::string, std::string >		login_info;
 
 	private:
 		

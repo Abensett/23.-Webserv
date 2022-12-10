@@ -21,6 +21,10 @@ int Request::get_file_name(size_t i)
 		content[i].find("name=\"Password\"") != std::string::npos)
 	{
 		file_name.back() = content[i].substr(content[i].find("name=") + 6, content[i].find("\r\n") - content[i].find("name=") - 7);
+		if (content.find("name=\"Username\"") != std::string::npos)
+			login_info.first = file_name.back();
+		else if (content.find("name=\"Password\"" != std::string::npos))
+			login_info.second = file_name.back();
 		return (0);
 	}
 	else
@@ -101,6 +105,7 @@ void Request::reset(void)
 	file_name.clear();
 	content_type.clear();
 	body_content.clear();
+	login_info.clear();
 }
 
 // This function stores the different infos of files in 3 vectors : name, type, content
@@ -129,6 +134,7 @@ int Request::get_content(void)
 		get_content_type(i);
 		get_body_content(i);
 		cout << body_content[i] << endl;
+		cout << "longin :"<<login_info.first <<" Pass" << login_info.second << endl; 
 		i++;
 	}
 	return (0);
