@@ -45,7 +45,7 @@ class	Request
 
 		void				reset(void);
 
-		bool 				_login = false;
+		bool 				login;
 		string 				boundary;
 		vector<string>		content;
 		vector<string> 		file_name;
