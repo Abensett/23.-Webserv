@@ -35,11 +35,11 @@ class Response
 		bool								_no_location;
 		char * const *						_env;
 
+
 		std::string							_header;
 		std::string							_body;
 		std::string							_response;
 		std::string							_path;
-		bool 								_is_admin;
 
 		// Update
 		int									get_location(void);
