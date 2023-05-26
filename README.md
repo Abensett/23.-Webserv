@@ -17,7 +17,7 @@
  - [x] Epoll
  - [x] `NGINX` is HTTP 1.1
  - [x] Accurate HTTP response `status codes`
- - [x] `Common GateWay Interface` : php
+ - [x] `Common Gateway Interface` : php
  - [x] File `uploads`
  - [x] `GET POST DELETE `
  - [x] Serve a fully static Website 
