@@ -3,7 +3,7 @@
 ## Table of contents
 * [Goal](#Goal)  
 * [Requirements](#Requirements)
-* [Ressources](#Ressources)
+* [Resources](#Resources)
 
 ## Goal
 > Code a `HTTP server in C++ 98`
